@@ -29,13 +29,13 @@ For example, with a project.clj that looks like this:
       :description "Do nifty things"
       ...)
 
+You can do this:      
+
     $ git tag -a -m "First version!" v1.0.0
     $ lein git-version
     1.0.0
-
-## Known issues
-
-
+    $ lein jar
+    Created /Users/colinsteele/Projects/nifty/target/nifty-1.0.0.jar
 
 ## License
 
