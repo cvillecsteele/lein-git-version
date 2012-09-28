@@ -1,5 +1,7 @@
 (ns lein-git-version.plugin
-  (:require [leiningen.git-version]))
+  (:use
+   [leiningen.git-version :only [get-git-version]]))
 
-(defn hooks []
-  (leiningen.git-version/activate))
+(defn middleware
+  [project]
+  (assoc project :version (get-git-version)))
