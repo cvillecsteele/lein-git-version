@@ -1,6 +1,9 @@
 # lein-git-version
 
-A Leiningen plugin to obtain a version identifier from git, using:
+I'm a big fan of DRY.  I already have version information in git for
+my projects.  Remembering to maintain that information in my
+project.clj is a PITA.  So... Here's a Leiningen plugin to obtain a
+version identifier from git, using:
 
     git describe --match 'v*.*' --abbrev=4 --dirty=**DIRTY**
 
@@ -29,6 +32,10 @@ For example, with a project.clj that looks like this:
     $ git tag -a -m "First version!" v1.0.0
     $ lein git-version
     1.0.0
+
+## Known issues
+
+
 
 ## License
 
