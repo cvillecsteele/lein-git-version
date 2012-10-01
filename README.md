@@ -18,7 +18,7 @@ In addition, it injects a file into <project>/src/<project>/version.clj, contain
 
 ## Usage
 
-Put `[lein-git-version "1.0.0"]` into the `:plugins` vector
+Put `[org.clojars.cvillecsteele/lein-git-version "1.0.0"]` into the `:plugins` vector
 of your project.clj.
 
 That's it.  The version string set in your project.clj will be
