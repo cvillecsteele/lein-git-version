@@ -56,7 +56,7 @@ The following are the defaults:
     (defproject nifty "bLAH BLaH"
       ...
       :git-version {:describe-command ["git" "describe" "--match" 
-                                       "v*.*""--abbrev=4"
+                                       "v*.*" "--abbrev=4"
                                        "--dirty=**DIRTY**"]
                     :tag->version (fn [tag] (apply str (rest tag)))})
     
