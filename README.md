@@ -44,6 +44,25 @@ You can do this:
     (def version "1.0.0")
     $
 
+## Configuration
+
+If you have your own version tagging scheme, and/or some other way of
+grabbing a version string from your source tree, you can add configure
+lein-git-version by adding keys to the :git-version hash-map in your
+project.
+
+The following are the defaults:
+
+    (defproject nifty "bLAH BLaH"
+      ...
+      :git-version {:describe-command ["git" "describe" "--match" 
+                                       "v*.*""--abbrev=4"
+                                       "--dirty=**DIRTY**"]
+                    :tag->version (fn [tag] (apply str (rest tag)))})
+    
+`describe-command` is a shell command that should print the current
+tag, and `:tag->version` translates the tag into the version string.
+
 ## License
 
 Copyright © 2012 Colin Steele
