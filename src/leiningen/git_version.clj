@@ -5,19 +5,22 @@
             [leiningen.core.main]
             [leiningen.core.project]
             [robert.hooke]
-            [leiningen.test])
+            [leiningen.test]
+            [clojure.string :as str])
   (:use
    [clojure.java.shell :only [sh]]))
 
+(def defaults
+  {:describe-command  ["git" "describe" "--match" "v*.*"
+                      "--abbrev=4" "--dirty=**DIRTY**"]
+   :tag->version '(fn [tag] (apply str (rest tag)))})
+
 (defn get-git-version
-  []
-  (apply str (rest (clojure.string/trim
-                    (:out (sh
-                           "git" "describe" "--match" "v*.*"
-                           "--abbrev=4" "--dirty=**DIRTY**"))))))
+  [& [config]]
+  (let [{:keys [tag->version describe-command]} (merge defaults config)]
+    ((eval tag->version) (str/trim (:out (apply sh describe-command))))))
 
 (defn git-version
-  "Main project task."
-  ^{:doc "Show git project version"}
+  "Show git project version"
   [project & args]
-  (println (get-git-version)))
+  (println (get-git-version (:git-version project))))
