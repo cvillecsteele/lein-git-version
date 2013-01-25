@@ -47,7 +47,7 @@ You can do this:
 ## Configuration
 
 If you have your own version tagging scheme, and/or some other way of
-grabbing a version string from your source tree, you can add configure
+grabbing a version string from your source tree, you can configure
 lein-git-version by adding keys to the :git-version hash-map in your
 project.
 
@@ -61,7 +61,8 @@ The following are the defaults:
                     :tag->version (fn [tag] (apply str (rest tag)))})
     
 `describe-command` is a shell command that should print the current
-tag, and `:tag->version` translates the tag into the version string.
+tag, and `tag->version` is a function that translates the tag into a
+version string.
 
 ## License
 
