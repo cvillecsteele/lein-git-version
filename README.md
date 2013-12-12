@@ -44,6 +44,38 @@ You can do this:
     (def version "1.0.0")
     $
 
+## Configuration
+
+If you have your own version tagging scheme, and/or some other way of
+grabbing a version string from your source tree, you can configure
+lein-git-version by adding keys to the :git-version map in your project.clj
+file.
+
+The following are the defaults:
+
+    (defproject nifty "blah blah"
+      ...
+      :git-version {:version-command ["git" "describe" "--match"
+                                      "v*.*" "--abbrev=4"
+                                      "--dirty=**DIRTY**"]
+                    :out->version '(fn [tag] tag)
+                    :assoc-in-keys [[:version]]
+                    :filename "version.clj"})
+
+`version-command` is the shell command used to grab the version information.
+`out->version` is used to post-process the output from the version command
+into a string if necessary.
+`assoc-in-keys` is a vector of key vectors use to place the version string
+into the project map.  The default is placing the version string at the :version
+key in the map.  If you would like to include it elsewhere (in the :manifest key
+for example) include additional entries
+    
+    :assoc-in-keys [[:version]
+                    [:manifest "Implementation-Version"]
+		    [:env :version]]
+`filename` is the name of the file that is created that allows you to access
+the version string programatically.
+
 ## License
 
 Copyright © 2012 Colin Steele
