@@ -63,8 +63,10 @@ The following are the defaults:
                     :filename "version.clj"})
 
 `version-command` is the shell command used to grab the version information.
+
 `out->version` is used to post-process the output from the version command
 into a string if necessary.
+
 `assoc-in-keys` is a vector of key vectors use to place the version string
 into the project map.  The default is placing the version string at the :version
 key in the map.  If you would like to include it elsewhere (in the :manifest key
@@ -72,7 +74,8 @@ for example) include additional entries
     
     :assoc-in-keys [[:version]
                     [:manifest "Implementation-Version"]
-		    [:env :version]]
+                    [:env :version]]
+
 `filename` is the name of the file that is created that allows you to access
 the version string programatically.
 
