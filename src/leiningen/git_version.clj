@@ -15,7 +15,7 @@
 
 (defn get-file-version [project]
   (let [config (:git-version project)
-        version (:version project)
+        version (apply str (take-while #(not (= \+ %)) (:version project)))
         {:keys [version-file-command]} (merge defaults config)]
     (str version "+" (str/trim (:out (apply sh version-file-command))))))
 
