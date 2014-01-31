@@ -1,7 +1,10 @@
 (ns lein-git-version.plugin
   (:require [clojure.java.io :as io]
+            [clojure.pprint :refer (pprint)]
             [clojure.string :as str]
             [leiningen.core.main]
+            [leiningen.install]
+            [leiningen.jar]
             [leiningen.git-version :refer [get-version]]
             [robert.hooke :refer (add-hook)]))
 
@@ -31,7 +34,7 @@
          (interpose "/")
          (apply str))))
 
-(defn- write-to-version-file [func task-name project args]
+(defn- write-to-version-file [project]
   (let [{:keys [group name git-version]} project
         config (merge default-keys git-version)
         filepath (:filepath config)
@@ -48,13 +51,11 @@
               (str "(def version \"" (get-version project true) "\")")
               ""]]
     (spit (version-file project) (str/join "\n" code))
-    (func task-name project args)))
+    project))
 
-(defn middleware
-  [{:keys [git-version] :as project}]
+(defn middleware [{:keys [git-version] :as project}]
   (let [config (merge default-keys git-version)
-        version (get-version project)]
-    (reduce #(assoc-in %1 %2 version) project (:assoc-keys config))))
-
-(defn hooks []
-  (add-hook #'leiningen.core.main/apply-task #'write-to-version-file))
+        version (get-version project)
+        project (reduce #(assoc-in %1 %2 version) project (:assoc-in-keys config))
+        project (assoc project :whitelist [:version :manifest])]
+    (write-to-version-file project)))
