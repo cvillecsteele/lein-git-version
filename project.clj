@@ -8,9 +8,8 @@
                    :plugins [[lein-midje "3.1.3"]
                              [org.ozias.plugins/lein-git-version "1.0.2"]]}}
   :aliases {"package" ["do" "clean," "install"]
-            "most" ["do" "clean," "doc," "package"]
             "dep" ["do" "deploy," "deploy" "clojars"]
-            "all" ["do" "most," "dep"]}
+            "all" ["do" "package," "dep"]}
   :jvm-opts ["-Xms1024m" "-Xmx1024m"]
   :deploy-repositories [["snapshots" 
                          {:url "http://www.ozias.net/artifactory/libs-snapshot-local"
