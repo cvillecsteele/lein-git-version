@@ -11,3 +11,4 @@ pom.xml.asc
 .lein-plugins
 .emacs.bmk
 .nrepl-port
+version.clj
