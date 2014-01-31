@@ -53,6 +53,8 @@ These are my most common use cases:
 ### Snapshots
 *project.clj*
 
+Note I've used the `filepath` key here because my plugin source is not in the standard location due to the manner in which lein loads plugins.  Normally `version.clj` would be created at `src/org/ozias/plugins/` in this case.
+
 ```clojure
 (defproject org.ozias.plugins/lein-git-version "1.0.2-SNAPSHOT"
   ...
