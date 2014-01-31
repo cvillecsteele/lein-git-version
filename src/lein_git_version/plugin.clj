@@ -4,7 +4,7 @@
             [clojure.string :as str]
             [leiningen.core.main]
             [leiningen.install]
-            [leiningen.jar]
+            [leiningen.jar :as jar]
             [leiningen.git-version :refer [get-version]]
             [robert.hooke :refer (add-hook)]))
 
@@ -53,9 +53,14 @@
     (spit (version-file project) (str/join "\n" code))
     project))
 
+(defn- retain-whitelisted-keys [f & [new original]]
+  (merge new (select-keys original (into jar/whitelist-keys [:version :manifest]))))
+
+(defn hooks[]
+  (add-hook #'leiningen.jar/retain-whitelisted-keys #'retain-whitelisted-keys))
+
 (defn middleware [{:keys [git-version] :as project}]
   (let [config (merge default-keys git-version)
         version (get-version project)
-        project (reduce #(assoc-in %1 %2 version) project (:assoc-in-keys config))
-        project (assoc project :whitelist [:version :manifest])]
+        project (reduce #(assoc-in %1 %2 version) project (:assoc-in-keys config))]
     (write-to-version-file project)))
