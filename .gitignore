@@ -3,8 +3,12 @@
 /classes
 /checkouts
 pom.xml
+pom.xml.asc
 *.jar
 *.class
 .lein-deps-sum
 .lein-failures
 .lein-plugins
+.emacs.bmk
+.nrepl-port
+version.clj
