@@ -4,18 +4,20 @@
             [clojure.string :as str :refer [trim]]))
 
 (def ^:private defaults
-  {:version-command ["git" "describe" "--match" "v*.*" "--abbrev=4" "--dirty=**DIRTY**"]
+  {:append? true
+   :version-command ["git" "describe" "--match" "v*.*" "--abbrev=4" "--dirty=**DIRTY**"]
    :version-file-command ["git" "describe" "--match" "v*.*" "--abbrev=4" "--dirty=**DIRTY**"]})
 
-(defn get-version [project & file]
-  (let [config (:git-version project)
-        version (:version project)
-        {:keys [version-command version-file-command]} (merge defaults config)
+(defn get-version [{:keys [git-version version]} & file]
+  (let [{:keys [version-command version-file-command append?]} (merge defaults git-version)
         cmd (if (seq file) version-file-command version-command)
-        shortver (apply str (take-while #(not (= \+ %)) version))]
-    (if (seq file)
-      (str shortver "+" (str/trim (:out (apply sh cmd))))
-      (str version "+" (str/trim (:out (apply sh cmd)))))))
+        basever (apply str (take-while #(not (= \+ %)) version))
+        cmdver (str/trim (:out (apply sh cmd)))]
+    (if append?
+      (if (seq file)
+        (str basever "+" cmdver)
+        (str version "+" cmdver))
+      (str cmdver))))
 
 (defn git-version
   "Show git project version"
