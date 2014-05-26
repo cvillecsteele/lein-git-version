@@ -5,5 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :eval-in-leiningen true
   :profiles
-  {:dev {:dependencies [[midje "1.4.0"]]
-         :plugins [[lein-midje "2.0.0-SNAPSHOT"]]}})
+  {:dev {:dependencies [[midje "1.6.3"]]
+         :plugins [[lein-midje "3.1.3"]]}})
