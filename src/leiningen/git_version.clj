@@ -11,14 +11,6 @@
   (:use
    [clojure.java.shell :only [sh]]))
 
-(defn- only-info [in-lines]
-  (loop [in-lines in-lines
-         out-lines []]
-    (let [line (first in-lines)]
-      (if (empty? line)
-        out-lines
-        (recur (rest in-lines) (conj out-lines line))))))
-
 (defn- to-kv [s]
   (-> (re-seq #"^([^\s:]+):?\s+(.+)$" s)
       first
@@ -31,7 +23,7 @@
    (-> (sh "git" "log" "-n" "1")
        :out
        (split #"\n"))
-   only-info
+   (take-while (comp not empty?))
    (map to-kv)
    flatten
    (apply hash-map)))
