@@ -14,8 +14,10 @@
                    (map (fn [[k v]] (format "  %s \"%s\"" k v)))
                    (join "\n"))
               "\n})\n")
-        filename (str (first (:source-paths project)) "/"
-                      (:name project) "/version.clj")]
+        filename (format "%s/%s/version.clj"
+                         (first (:source-paths project))
+                         (.replace (:name project) "-" "_"))]
+    (println filename) ; TODO
     (-> project
         (update-in [:injections] concat `[(spit ~filename ~code)])
         (assoc :version (:version info)))))
