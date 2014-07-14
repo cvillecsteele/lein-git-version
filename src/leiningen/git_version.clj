@@ -17,7 +17,7 @@
                            "--abbrev=4" "--dirty=**DIRTY**"))))))
 
 (defn git-version
-  "Main project task."
+  "Show project version, as tagged in git."
   ^{:doc "Show git project version"}
   [project & args]
   (println (get-git-version)))
