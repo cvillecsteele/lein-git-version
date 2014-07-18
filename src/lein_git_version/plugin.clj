@@ -14,6 +14,5 @@
                    (str (:git-version-path project) "/version.clj")
                    (str (or (first (:source-paths project)) "src") "/"
                         proj-dir "/version.clj"))]
-    (-> project
-        (update-in [:injections] concat `[(spit ~filename ~code)])
-        (assoc :version (get-git-version)))))
+    (spit filename code)
+    (assoc project :version (get-git-version))))
