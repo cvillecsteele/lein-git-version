@@ -9,12 +9,8 @@
   (:use
    [clojure.java.shell :only [sh]]))
 
-(defn get-git-version
-  []
-  (apply str (rest (clojure.string/trim
-                    (:out (sh
-                           "git" "describe" "--match" "v*.*"
-                           "--abbrev=4" "--dirty=**DIRTY**"))))))
+(defn get-git-version []
+  (clojure.string/trim (:out (sh "git" "describe" "--dirty"))))
 
 (defn git-version
   "Show project version, as tagged in git."
