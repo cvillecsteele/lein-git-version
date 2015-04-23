@@ -16,6 +16,12 @@
                            "git" "describe" "--match" "v*.*"
                            "--abbrev=4" "--dirty=**DIRTY**"))))))
 
+(defn get-git-ref
+  []
+  (apply str (rest (clojure.string/trim
+                    (:out (sh
+                           "git" "rev-parse" "--verify" "HEAD"))))))
+
 (defn git-version
   "Show project version, as tagged in git."
   ^{:doc "Show git project version"}
