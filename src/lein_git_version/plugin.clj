@@ -37,7 +37,7 @@
                         proj-dir "/version.clj"))]
     (cond-> project
       (:git-version project)
-      (-> project
-          (update-in [:injections] concat `[(spit ~filename ~code)])
+      (-> (update-in [:injections] concat `[(spit ~filename ~code)])
           (assoc :version (get-git-version project))
-          (assoc :gitref (get-git-ref project))))))
+          (assoc :gitref (get-git-ref project)))
+      true identity)))
