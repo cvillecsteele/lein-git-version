@@ -4,5 +4,7 @@
         [midje.sweet]))
 
 (facts
-  (re-find #"1.0.0" (get-git-version)) => "1.0.0")
+  (re-find #"1.0.*" (get-git-version {})) => string?
+  (count (get-git-ref {})) => 40
+  (re-matcher #"commit.*\nAuthor.*\nDate.*" (get-git-last-message {})) => truthy)
 
