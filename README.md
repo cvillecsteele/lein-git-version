@@ -71,11 +71,14 @@ The `:git-version` map can have several entries:
                   :ref-cmd "git rev-parse --verify HEAD"
                   :msg-cmd "git log -1 HEAD"
                   :ts-cmd "git log -1 --pretty=%ct"
+                  :assoc-in-keys [[:version]]
+                  :filename "version.clj"
                   :tag-to-version #(apply str (rest %))}
 
 Each can be changed to customize what the plugin saves into
-`version.clj`. The `-cmd` entries are split on the space character, so
-don't have any extraneous ones lying around.
+`version.clj` and/or how it alters the project map. The `-cmd` entries
+are split on the space character, so don't have any extraneous ones
+lying around.
 
 ## License
 
