@@ -72,7 +72,7 @@ The `:git-version` map can have several entries:
                   :msg-cmd "git log -1 HEAD"
                   :ts-cmd "git log -1 --pretty=%ct"}
 
-Each can be changed to customize what the plugin shaves into
+Each can be changed to customize what the plugin saves into
 `version.clj`. The `-cmd` entries are split on the space character, so
 don't have any extraneous ones lying around.
 
