@@ -14,11 +14,14 @@
 (def default-ref-cmd "git rev-parse --verify HEAD")
 (def default-msg-cmd "git log -1 HEAD")
 (def default-ts-cmd "git log -1 --pretty=%ct")
+(def default-tag-to-version #(apply str (rest %)))
 
 (defn get-git-version
   [{:keys [git-version] :as project}]
-  (let [cmd (clojure.string/split (:version-cmd git-version default-version-cmd) #" ")]
-    (apply str (rest (clojure.string/trim (:out (apply sh cmd)))))))
+  (let [f (or (:tag-to-version git-version)
+              default-tag-to-version)
+        cmd (clojure.string/split (:version-cmd git-version default-version-cmd) #" ")]
+    (f (apply str (rest (clojure.string/trim (:out (apply sh cmd))))))))
 
 (defn get-git-ref
   [{:keys [git-version] :as project}]

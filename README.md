@@ -70,7 +70,8 @@ The `:git-version` map can have several entries:
                   :version-cmd "git describe --match v*.* --abbrev=4 --dirty=**DIRTY**"
                   :ref-cmd "git rev-parse --verify HEAD"
                   :msg-cmd "git log -1 HEAD"
-                  :ts-cmd "git log -1 --pretty=%ct"}
+                  :ts-cmd "git log -1 --pretty=%ct"
+                  :tag-to-version #(apply str (rest %))}
 
 Each can be changed to customize what the plugin saves into
 `version.clj`. The `-cmd` entries are split on the space character, so
