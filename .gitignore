@@ -10,3 +10,4 @@ pom.xml
 .lein-plugins
 pom.xml.asc
 .nrepl-port
+src/lein_git_version/version.clj

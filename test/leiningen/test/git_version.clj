@@ -19,7 +19,7 @@
    :git-version {}})
 
 (facts
-  (re-find #"1.0.*" (get-git-version default-config)) => string?
+  (re-find #"1.2.*" (get-git-version default-config)) => string?
   (count (get-git-ref default-config)) => 40
   (re-matcher #"commit.*\nAuthor.*\nDate.*"
               (get-git-last-message default-config)) => truthy
@@ -27,7 +27,7 @@
     cooked => contains {:injections anything
                         :gitref string?
                         :version string?}
-    (re-find #"1.0.*" (:version cooked)) => string?))
+    (re-find #"1.2.*" (:version cooked)) => string?))
 
 
 
