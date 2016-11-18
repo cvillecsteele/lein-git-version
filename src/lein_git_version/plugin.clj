@@ -10,16 +10,16 @@
 (defn- version-file
   [{:keys [git-version group name source-paths] :as project} config]
   (let [srcpath (first (filter seq (map #(re-find #".*src$" %) source-paths)))]
-    (str/replace
-     (->> (conj []
-                srcpath
-                (if (seq group) (str/replace group "." "/"))
-                name
-                (:filename config))
-          (filter seq)
-          (interpose "/")
-          (apply str))
-     "-" "_")))
+    (->> (conj []
+               srcpath
+               (str/replace
+                (or (if (seq group) (str/replace group "." "/"))
+                    name)
+                "-" "_")
+               (:filename config))
+         (filter seq)
+         (interpose "/")
+         (apply str))))
 
 (defn assoc-version
   [project version config]
@@ -54,9 +54,10 @@
                    (version-file project config))
         version (get-git-version config)]
     (if git-version
-      (-> project
-          (update-in [:injections] concat `[(spit ~filename ~code)])
-          (assoc-version version config)
-          (assoc :gitref (get-git-ref config)))
+      (do
+        (spit filename code)
+        (-> project
+            (assoc-version version config)
+            (assoc :gitref (get-git-ref config))))
       project)))
 
