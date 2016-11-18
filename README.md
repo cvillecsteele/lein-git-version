@@ -25,7 +25,7 @@ Add:
     :git-version {}
 
     ;; Add in the git-version plugin
-    :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.1.0"]]}}
+    :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.2.1"]]}}
 
 to your `project.clj`.
 
@@ -39,7 +39,7 @@ For example, with a project.clj that looks like this:
     (defproject nifty "bLAH BLaH"
       :description "Do nifty things"
       :git-version {}
-      :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.1.0"]]}}
+      :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.2.1"]]}}
       ...)
 
 You can do this:      
