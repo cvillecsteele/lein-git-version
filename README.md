@@ -25,7 +25,7 @@ Add:
     :git-version {}
 
     ;; Add in the git-version plugin
-    :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.2.1"]]}}
+    :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.2.2"]]}}
 
 to your `project.clj`.
 
