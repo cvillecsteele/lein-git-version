@@ -39,7 +39,7 @@ For example, with a project.clj that looks like this:
     (defproject nifty "bLAH BLaH"
       :description "Do nifty things"
       :git-version {}
-      :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.2.1"]]}}
+      :profiles {:dev {:plugins [[org.clojars.cvillecsteele/lein-git-version "1.2.2"]]}}
       ...)
 
 You can do this:      
