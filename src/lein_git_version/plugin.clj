@@ -53,7 +53,7 @@
         filename (if (:path config)
                    (str (:path config) "/" (:filename config))
                    (version-file project config))]
-    (if version
+    (if git-version
       (let [project* (-> project
                          (assoc-version version config)
                          (assoc :gitref (get-git-ref config)))]
