@@ -46,7 +46,7 @@
   "Show project version, as tagged in git."
   ^{:doc "Show git project version"}
   [project & args]
-  (let [config (merge default-config git-version)]
+  (let [config (merge default-config (:git-version project))]
     (println "Version:" (:version project) "\n" (get-git-last-message config))))
 
 ;; (get-git-version {:git-version {:version-cmd "git describe --abbrev=0"}})
