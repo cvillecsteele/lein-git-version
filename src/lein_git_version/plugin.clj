@@ -1,6 +1,6 @@
 (ns lein-git-version.plugin
   (:require
-   [clojure.pprint]
+   [clojure.java.io :as io]
    [clojure.string :as str]
    [leiningen.git-version :refer :all])
   (:import
@@ -51,7 +51,9 @@
               "(def gitmsg \"" (get-git-last-message config) "\")\n")
         proj-dir (.toLowerCase (.replace (:name project) \- \_))
         filename (if (:path config)
-                   (str (:path config) "/" (:filename config))
+                   (if (.isAbsolute (io/file (:path config)))
+                     (str (:path config) "/" (:filename config))
+                     (str (:root config) "/" (:filename config)))
                    (version-file project config))]
     (if git-version
       (let [project* (-> project

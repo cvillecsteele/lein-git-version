@@ -68,6 +68,7 @@ You can do this:
 The `:git-version` map can have several entries:
 
     :git-version {:root-ns "my-namespace"
+                  ;; If :path is relative it's considered relative to the root path of the lein project.
                   :path "some/other/place"
                   :version-cmd "git describe --match v*.* --abbrev=4 --dirty=**DIRTY**"
                   :ref-cmd "git rev-parse --verify HEAD"
