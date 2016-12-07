@@ -53,7 +53,7 @@
         filename (if (:path config)
                    (if (.isAbsolute (io/file (:path config)))
                      (str (:path config) "/" (:filename config))
-                     (str (:root config) "/" (:filename config)))
+                     (str (:root project) "/" (:path config) "/" (:filename config)))
                    (version-file project config))]
     (if git-version
       (let [project* (-> project
