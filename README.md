@@ -1,4 +1,9 @@
-# lein-git-version
+# DEPRECATED!!!!
+
+Use [this(https://github.com/arrdem/lein-git-version) instead!
+
+
+## lein-git-version
 
 I'm a big fan of DRY.  I already have version information in git for
 my projects.  Remembering to maintain that information in my
