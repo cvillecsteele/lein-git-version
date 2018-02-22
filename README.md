@@ -1,6 +1,6 @@
 # DEPRECATED!!!!
 
-Use [this(https://github.com/arrdem/lein-git-version) instead!
+Use [this](https://github.com/arrdem/lein-git-version) instead!
 
 
 ## lein-git-version
