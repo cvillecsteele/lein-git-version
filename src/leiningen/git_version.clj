@@ -18,12 +18,13 @@
    :root-ns nil
    :assoc-in-keys [[:version]]
    :filename "version.clj"
-   :tag-to-version #(apply str (rest %))})
+   :tag-to-version `#(apply str (rest %))})
 
 (defn get-git-version
   [{:keys [version-cmd tag-to-version] :as config}]
-  (let [cmd (clojure.string/split version-cmd #" ")]
-    (tag-to-version (clojure.string/trim (:out (apply sh cmd))))))
+  (let [cmd (clojure.string/split version-cmd #" ")
+        out (clojure.string/trim (:out (apply sh cmd)))]
+    (eval `(~tag-to-version ~out))))
 
 (defn get-git-ref
   [{:keys [ref-cmd] :as config}]
